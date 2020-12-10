@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class State {
 
     private int people = 5;
-    private int sides = 2;
+    final int sides = 2;
     private Person [][] tiles;
     private State father = null;
     private boolean waa;
@@ -164,10 +164,7 @@ public class State {
                 return false;
             }
         }
-        if (this.time < 30){
-            return true;
-        }
-        return false;
+        return true;
     }
 
     public void print()
@@ -194,6 +191,10 @@ public class State {
             System.out.println();
         }
         System.out.println("------------------------------------");
+    }
+
+    public int getTime(){
+        return time;
     }
 
 }

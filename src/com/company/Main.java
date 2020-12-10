@@ -43,6 +43,5 @@ public class Main {
 		System.out.println("BFS with closed set search time: " + (double)(end - start) / 1000 + " sec.");
 		System.out.println("***************");
 
-
     }
 }

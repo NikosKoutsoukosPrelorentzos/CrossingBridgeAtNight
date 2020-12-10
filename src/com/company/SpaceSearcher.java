@@ -8,9 +8,12 @@ public class SpaceSearcher {
 
     private ArrayList<State> states;
     private HashSet<State> closedSet;
+    private ArrayList<State> terminalStates;
+    private int min;
 
     SpaceSearcher()
     {
+        this.terminalStates = new ArrayList<State>();
         this.states = new ArrayList<State>();
         this.closedSet = new HashSet<State>();
     }
@@ -26,6 +29,7 @@ public class SpaceSearcher {
 
         this.states.addAll(initialState.getChildrenCrossingEast(1));
 
+
         while(states.size() > 0)
         {
             State currentState = this.states.remove(0);
@@ -34,7 +38,7 @@ public class SpaceSearcher {
 
             if(currentState.isTerminal())
             {
-                return currentState;
+                terminalStates.add(currentState);
             }
 
             if(!closedSet.contains(currentState))
@@ -51,6 +55,21 @@ public class SpaceSearcher {
                 }
             }
         }
-        return null;
+
+        State someTerminal = this.terminalStates.remove(0);
+        min = someTerminal.getTime();
+        State finalTerminal = someTerminal;
+
+        while(terminalStates.size()>0){
+
+            if (someTerminal.getTime()<min){
+                min = someTerminal.getTime();
+                finalTerminal = someTerminal;
+            }
+            someTerminal = this.terminalStates.remove(0);
+
+        }
+        return finalTerminal;
     }
 }
+
